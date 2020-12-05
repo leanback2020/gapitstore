@@ -32,6 +32,13 @@ const Header = () => {
                   <i className="fas fa-shopping-cart"></i> Cart
                 </Nav.Link>
               </LinkContainer>
+              {userInfo && (
+                <LinkContainer to="/dashboard">
+                  <Nav.Link>
+                    <i className="fa fa-tachometer-alt" aria-hidden="true"></i> Dashboard
+                  </Nav.Link>
+                </LinkContainer>
+              )}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">

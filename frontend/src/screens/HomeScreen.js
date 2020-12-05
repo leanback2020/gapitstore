@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import Paginate from '../components/Paginate'
-import ProductCarousel from '../components/ProductCarousel'
-import Meta from '../components/Meta'
-import { listProducts } from '../actions/productActions'
+import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Row, Col } from "react-bootstrap"
+import Product from "../components/Product"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import Paginate from "../components/Paginate"
+import ProductCarousel from "../components/ProductCarousel"
+import Meta from "../components/Meta"
+import { listProducts } from "../actions/productActions"
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -30,7 +30,7 @@ const HomeScreen = ({ match }) => {
       {!keyword ? (
         <ProductCarousel />
       ) : (
-        <Link to='/' className='btn btn-light'>
+        <Link to="/" className="btn btn-light">
           Go Back
         </Link>
       )}
@@ -38,7 +38,7 @@ const HomeScreen = ({ match }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <>
           <Row>
@@ -48,11 +48,7 @@ const HomeScreen = ({ match }) => {
               </Col>
             ))}
           </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ''}
-          />
+          <Paginate pages={pages} page={page} keyword={keyword ? keyword : ""} />
         </>
       )}
     </>
