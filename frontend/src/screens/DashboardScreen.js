@@ -17,22 +17,28 @@ const DashboardScreen = ({ match }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   var myData = []
-  var deviceName = localStorage.getItem("deviceName")
-  useEffect(() => {
-    dispatch(SensorDataLastTemperature())
-  }, [dispatch])
+  var deviceName = ""
 
-  if (loading) {
+  useEffect(() => {
+    dispatch(SensorDataLastTemperature(userInfo.gateway))
+  }, [dispatch, userInfo.gateway])
+
+  useEffect(() => {
+    if (deviceName !== "") dispatch(SensorHistoricalData(deviceName, userInfo.gateway))
+  }, [dispatch, deviceName, userInfo.gateway])
+
+  if (loading || loading === undefined) {
     return <Loader />
   } else {
     myData = JSON.stringify(sensorDataLastTemperature).split(",")
-    console.log(myData[0].split(":")[0].replace("{", ""))
+    deviceName = myData[0].split(":")[0].replace("{", "").replace('"', "").replace('"', "")
+
+    dispatch(SensorHistoricalData(deviceName, userInfo.gateway))
   }
 
   return (
     <>
       <Meta />
-
       <h1>Dashboard {userInfo.name}</h1>
       {loading ? (
         <Loader />
@@ -40,11 +46,11 @@ const DashboardScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          {<SensorChart deviceName={deviceName} />}
+          {<SensorChart deviceName={deviceName} gateway={userInfo.gateway} />}
           <Row>
             {myData.map((device, index) => (
               <Col key={index} sm={12} md={6} lg={4} xl={3}>
-                <Gauge device={device} />
+                <Gauge device={device} gateway={userInfo.gateway} />
               </Col>
             ))}
           </Row>

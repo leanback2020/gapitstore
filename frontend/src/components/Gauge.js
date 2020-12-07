@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap"
 import GaugeChart from "react-gauge-chart"
 import { SensorHistoricalData } from "../actions/sensorActions"
 
-const Gauge = ({ device }) => {
+const Gauge = ({ device, gateway }) => {
   const dispatch = useDispatch()
   device = device.replace('"', "").replace('"', "").replace('"', "").replace('"', "").replace("{", "").replace("}", "")
   var deviceInfo = device.toString().split(":")
@@ -16,16 +16,16 @@ const Gauge = ({ device }) => {
   }
 
   const showGraphHandler = (e) => {
-    console.log(deviceInfo[0])
     localStorage.setItem("deviceName", deviceInfo[0])
-    dispatch(SensorHistoricalData(deviceInfo[0]))
+    localStorage.setItem("gateway", gateway)
+    dispatch(SensorHistoricalData(deviceInfo[0], gateway))
   }
 
   return (
     <Card className="my-3 p-3 rounded">
       <div align="center">
         <Card.Title style={{ alignContent: "center" }} as="div">
-          {deviceInfo[0] + " " + typeof temperature}
+          {deviceInfo[0]}
         </Card.Title>
       </div>
       <Card.Body>
