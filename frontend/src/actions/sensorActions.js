@@ -27,7 +27,7 @@ export const SensorDataLastTemperature = (gateway) => async (dispatch) => {
     dispatch({ type: SENSORDATA_LAST_TEMPERATURE_REQUEST })
 
     const { data } = await axios.get(`https://gapit-smart-react-dashboard-api.azurewebsites.net/api/GetDeviceData?gateway=${gateway}`)
-
+    //  const { data } = await axios.get(`https://cors-anywhere.herokuapp.com/http://localhost:7071/api/GetDeviceData?gateway=${gateway}`)
     dispatch({
       type: SENSORDATA_LAST_TEMPERATURE_SUCCESS,
       payload: data,

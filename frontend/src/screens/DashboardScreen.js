@@ -31,7 +31,7 @@ const DashboardScreen = ({ match }) => {
     return <Loader />
   } else {
     myData = JSON.stringify(sensorDataLastTemperature).split(",")
-    deviceName = myData[0].split(":")[0].replace("{", "").replace('"', "").replace('"', "")
+    deviceName = myData[0].split(":")[1].replace("{", "").replace('"', "").replace('"', "")
 
     dispatch(SensorHistoricalData(deviceName, userInfo.gateway))
   }
@@ -48,7 +48,7 @@ const DashboardScreen = ({ match }) => {
         <>
           {<SensorChart deviceName={deviceName} gateway={userInfo.gateway} />}
           <Row>
-            {myData.map((device, index) => (
+            {sensorDataLastTemperature.map((device, index) => (
               <Col key={index} sm={12} md={6} lg={4} xl={3}>
                 <Gauge device={device} gateway={userInfo.gateway} />
               </Col>

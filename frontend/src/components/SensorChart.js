@@ -18,9 +18,26 @@ const SensorChart = () => {
         },
       },
       options: {
+        annotations: {
+          yaxis: [
+            {
+              y: 70,
+              borderColor: "#FF4560",
+              label: {
+                borderColor: "#FF4560",
+                style: {
+                  color: "#fff",
+                  background: "#FF4560",
+                },
+                text: "Alarm Grense",
+              },
+            },
+          ],
+        },
         chart: {
           id: "basic-bar",
         },
+
         xaxis: {
           type: "datetime",
           labels: {
@@ -60,7 +77,10 @@ const SensorChart = () => {
     }
   }
   return loading ? (
-    <Loader />
+    <div height="400">
+      {" "}
+      <Loader />{" "}
+    </div>
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
