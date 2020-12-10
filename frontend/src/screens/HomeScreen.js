@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { Row, Col } from "react-bootstrap"
+import YouTube from "react-youtube"
 import Product from "../components/Product"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
@@ -12,7 +13,10 @@ import { listProducts } from "../actions/productActions"
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
-
+  const opts = {
+    width: "100%",
+    height: "600",
+  }
   const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch()
@@ -24,17 +28,25 @@ const HomeScreen = ({ match }) => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
 
+  function onReady(event) {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo()
+  }
+
   return (
     <>
       <Meta />
       {!keyword ? (
-        <ProductCarousel />
+        <>
+          <YouTube videoId="gAT2neau2no" opts={opts} onReady={onReady} />
+          <ProductCarousel />
+        </>
       ) : (
         <Link to="/" className="btn btn-light">
           Go Back
         </Link>
       )}
-      <h1>Latest Products</h1>
+      <h1>Siste Produkter</h1>
       {loading ? (
         <Loader />
       ) : error ? (

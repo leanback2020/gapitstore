@@ -37,7 +37,7 @@ const Gauge = ({ device, gateway }) => {
             <>
               <GaugeChart id="gauge-chart5" style={chartStyle} cornerRadius={6} formatTextValue={(value) => value + "°C"} textColor={"#333333"} nrOfLevels={30} colors={["#5BE12C", "#F5CD19", "#EA4228"]} percent={temperature} marginInPercent={0.05} arcPadding={0.03} arcWidth={0.3} />
               <Button variant="outline-success" size="sm" className="p-2" onClick={showGraphHandler}>
-                Show Graph
+                Vis Graf
               </Button>
             </>
           )}

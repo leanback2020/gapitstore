@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import SearchBox from "./SearchBox"
 import { logout } from "../actions/userActions"
+import { Logo } from "./Icons"
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -18,18 +19,20 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>GapitSmart</Navbar.Brand>
+            <a href="/">
+              {" "}
+              <Logo width="300" />
+            </a>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
+                  <i className="fas fa-shopping-cart"></i>
                 </Nav.Link>
               </LinkContainer>
               {userInfo && (
@@ -66,6 +69,7 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
+              <Route render={({ history }) => <SearchBox history={history} />} />
             </Nav>
           </Navbar.Collapse>
         </Container>
